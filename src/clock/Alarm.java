@@ -5,8 +5,16 @@
 package clock;
 
 /**
- *
- * @author dev
+ * This is a simplistic Alarm Object Class, which takes in data from the model / view 
+ * which will then be added to the priority queue. 
+ * 
+ * This class will return the values set by the alarm, as well as a string representation
+ * of the time set within the alarm.
+ * 
+ * @param hour - int type - contains the hour value of the alarm set
+ * @param minute - int type - contains the minute value of the alarm set
+ * @param second - int type - contains the seconds value of the alarm set
+ * @author Alanna Zimbehl - 19016467
  */
 public class Alarm {
     
