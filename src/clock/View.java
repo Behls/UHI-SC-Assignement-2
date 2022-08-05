@@ -7,43 +7,82 @@ import java.util.Observable;
 
 public class View implements Observer {
     
-    ClockPanel panel;
+    AlarmPanel panel;
+    JButton aboutButton;
+    JButton setAlarm;
+    JButton digitalFace;
+    JButton analogFace;
+    JMenu menu;
+    
+    JMenuItem aboutItem;
+    JMenuItem viewAlarms;
+    JMenuItem setAlarms;
     
     public View(Model model) {
+        
         JFrame frame = new JFrame();
-        panel = new ClockPanel(model);
+        panel = new AlarmPanel(model);
         //frame.setContentPane(panel);
-        frame.setTitle("Java Clock");
+        frame.setTitle("Java Alarm Clocks ");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        // Start of border layout code
-        
-        // I've just put a single button in each of the border positions:
-        // PAGE_START (i.e. top), PAGE_END (bottom), LINE_START (left) and
-        // LINE_END (right). You can omit any of these, or replace the button
-        // with something else like a label or a menu bar. Or maybe you can
-        // figure out how to pack more than one thing into one of those
-        // positions. This is the very simplest border layout possible, just
-        // to help you get started.
         
         Container pane = frame.getContentPane();
         
-        JButton button = new JButton("Button 1 (PAGE_START)");
-        pane.add(button, BorderLayout.PAGE_START);
-         
-        panel.setPreferredSize(new Dimension(200, 200));
+//      About Button
+        aboutButton = new JButton("About");
+        pane.add(aboutButton, BorderLayout.PAGE_START);
+        aboutButton.addActionListener(new AboutButtonHandler());
+        
+//      Menu Bar & Menus
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu = new JMenu("Clock");
+        JMenu alarm = new JMenu("Alarms");
+        
+//      About menu item        
+        aboutItem = new JMenuItem("About");
+        aboutItem.addActionListener(new AboutButtonHandler());
+        aboutItem.setMnemonic('A');
+        menu.add(aboutItem);
+        menuBar.add(menu);
+        
+        
+//      Clock Radio Buttons
+        JRadioButtonMenuItem analogButton = new JRadioButtonMenuItem("Analog Clock", true);
+        JRadioButtonMenuItem digitalButton = new JRadioButtonMenuItem("Digital Clock", false);
+        ButtonGroup group = new ButtonGroup();
+        group.add(analogButton);
+        group.add(digitalButton);
+        menu.add(analogButton);
+        menu.add(digitalButton);
+        
+        
+//      Alarm Menu Items
+        viewAlarms = new JMenuItem("View Alarms");
+        setAlarms = new JMenuItem("Set Alarms");
+        alarm.add(viewAlarms);
+        alarm.add(setAlarms);
+        menuBar.add(alarm);
+        
+ 
+//      centered clock       
+        panel.setPreferredSize(new Dimension(300, 200));
         pane.add(panel, BorderLayout.CENTER);
-         
-        button = new JButton("Button 3 (LINE_START)");
-        pane.add(button, BorderLayout.LINE_START);
-         
-        button = new JButton("Long-Named Button 4 (PAGE_END)");
-        pane.add(button, BorderLayout.PAGE_END);
-         
-        button = new JButton("5 (LINE_END)");
-        pane.add(button, BorderLayout.LINE_END);
+        
+//      main clock UI
+        setAlarm = new JButton("Set Alarm");
+        pane.add(setAlarm, BorderLayout.PAGE_END);
+        
+        digitalFace = new JButton("Switch to Digital");
+        pane.add(digitalFace, BorderLayout.LINE_START);
+        
+        analogFace = new JButton("Switch to Analog");
+        pane.add(analogFace, BorderLayout.LINE_END);
+     
         
         // End of borderlayout code
+        
+        //      Setting the menubar
+        frame.setJMenuBar(menuBar);
         
         frame.pack();
         frame.setVisible(true);

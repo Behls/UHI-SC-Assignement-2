@@ -1,6 +1,8 @@
 package clock;
 
 import java.awt.event.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Timer;
 
 public class Controller {
@@ -16,10 +18,10 @@ public class Controller {
         view = v;
         
         listener = new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                model.update();
-            }
-        };
+               model.update();
+        }};
         
         timer = new Timer(100, listener);
         timer.start();
