@@ -10,6 +10,7 @@ package clock;
  * 
  * This class will return the values set by the alarm, as well as a string representation
  * of the time set within the alarm.
+ * @author Alanna Zimbehl - 19016467
  */
 
 public class Alarm {
@@ -17,7 +18,6 @@ public class Alarm {
  * @param hour contains the hour value of the alarm set
  * @param minute contains the minute value of the alarm set
  * @param second contains the seconds value of the alarm set
- * @author Alanna Zimbehl - 19016467
  */
     
     private int hour;

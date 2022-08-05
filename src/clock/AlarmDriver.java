@@ -10,7 +10,7 @@ package clock;
  * 
  * This class is designed to initialise various Alarm Objects and will also be sued to 
  * test the priority queue to ensure its functionality before merging into the main code base.
- * 
+ *
  * @author Alanna Zimbehl - 19016467
  */
 
