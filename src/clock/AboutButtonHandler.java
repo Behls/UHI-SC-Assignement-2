@@ -25,6 +25,10 @@ public class AboutButtonHandler implements ActionListener {
         openDialogue();
     }
     
+         /**
+ * @method - opens a dialogue box which contains the about message of the application
+
+ */
     
     private void openDialogue(){
         JFrame frame = new JFrame();

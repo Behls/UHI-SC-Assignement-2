@@ -31,7 +31,7 @@ public class View implements Observer {
         panel = new ClockPanel(model);
         alarmClock = new AlarmPanel(model);
         
-//      frame.setContentPane(panel);
+      frame.setContentPane(panel);
 
         frame.setTitle("Java Alarm Clocks ");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -100,6 +100,10 @@ public class View implements Observer {
         
 //      centered clock       
         panel.setPreferredSize(new Dimension(300, 200));
+        pane.add(panel, BorderLayout.CENTER);
+
+//      centered clock       
+        alarmClock.setPreferredSize(new Dimension(300, 200));
         pane.add(panel, BorderLayout.CENTER);
         
 //      main clock UI
