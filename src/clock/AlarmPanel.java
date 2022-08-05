@@ -31,7 +31,7 @@ public class AlarmPanel extends JPanel {
         model = m;
         setPreferredSize(new Dimension(200,00));
         setBackground(Color.white);
-        setVisible(true);
+        setVisible(false);
     
     }
     

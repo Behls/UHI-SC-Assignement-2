@@ -20,9 +20,14 @@ public class Alarm {
  * @param second contains the seconds value of the alarm set
  */
     
-    private int hour;
-    private int minute;
-    private int second;
+    private int hour = 0;
+    private int minute = 0;
+    private int second =0;
+    
+//  placeholder variables for increasing and decreasing alarm values when set
+    private int hourValue;
+    private int minuteValue;
+    private int secondValue;
     
     public Alarm(int hour, int minute, int second) {
         this.hour = hour;
@@ -52,6 +57,72 @@ public class Alarm {
 
     public void setSecond(int second) {
         this.second = second;
+    }
+    
+    public void incrementHour(){
+        int value = this.hourValue;
+        if(value >= 0 && value < 24){
+            value++;
+        }else{
+            value = 0;
+        }
+        hour = value;           
+    }
+    
+    public void incrementMinute(){
+        int value = this.minuteValue;
+        if(value < 59 && value >= 0){
+        value++;
+        }else{
+            value = 0;
+        }  
+        
+        minute = value;
+    }
+    
+    public void incrementSecond(){
+        int value = this.secondValue;
+        if(value < 59 && value >= 0){
+        value++;
+        }else{
+            value = 0;
+        }  
+        
+        second = value;         
+    }
+    
+    public void decreaseHour(){
+        int value = this.hourValue;
+        if(value >= 0 && value < 24){
+            value--;
+        }else{
+            value = 0;
+        }
+        hour = value;          
+    }
+    
+    public void decreaseMinute(){
+        int value = this.minuteValue;
+        
+        if(value < 59 && value >= 0){
+            value--;
+            
+        }else{
+            value = 0;
+        }   
+        minute = value;         
+    }
+    
+    public void decreaseSecond(){
+        int value = this.secondValue;
+        
+        if(value < 59 && value >= 0){
+            value--;
+            
+        }else{
+            value = 0;
+        }   
+        second = value; 
     }
     
     public String getTime(){
