@@ -14,21 +14,34 @@ package clock;
  * @author Alanna Zimbehl - 19016467
  */
 
-public class AlarmDriver {
-   
-    public static void main (String[] args){
-  
-//      new alarm objects
-        Alarm alarm1 = new Alarm(10,12,54);
-        Alarm alarm2 = new Alarm(15,34,12);
-        Alarm alarm3 = new Alarm(13,45,23);
-        
-//        print out the objects methods
-        
-        System.out.println(alarm1.getHour());
-        System.out.println(alarm2.toString());
-        System.out.println(alarm3.getMinute());
-  
-    }
-    
-}
+//public class AlarmDriver {
+//   
+//    public static void main (String[] args) throws QueueIsFullError, QueueIsEmptyError{
+//        
+//        PriorityQueue clock;
+//
+//        clock = new PriorityQueue(100);
+//       
+//        
+//      
+//  
+////      new alarm objects
+//        Alarm alarm1 = new Alarm(10,12,54);
+//        Alarm alarm2 = new Alarm(15,34,12);
+//        Alarm alarm3 = new Alarm(13,45,23);
+//        
+////        print out the objects methods
+//        
+//        System.out.println(alarm1.getHour());
+//        System.out.println(alarm2.toString());
+//        System.out.println(alarm3.getMinute());
+//        
+//        clock.add(alarm1, 10);
+//        clock.add(alarm2, 6);
+//        clock.add(alarm3, 5);
+//       
+//        System.out.println(clock.head());
+//  
+//    }
+//    
+//}
