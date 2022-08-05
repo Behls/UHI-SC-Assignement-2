@@ -35,6 +35,11 @@ public class Alarm {
         this.second = second;
     }
     
+  /**
+ * Setters and Getter
+ * Standard setter and getter methods which set and return the values of Alarm
+ */
+    
     public int getHour() {
         return hour;
     }
@@ -58,6 +63,12 @@ public class Alarm {
     public void setSecond(int second) {
         this.second = second;
     }
+    
+      /**
+ * methods which increase the hour,minute and second values
+ * this would be interacted through the UI - through button components
+
+ */
     
     public void incrementHour(){
         int value = this.hourValue;

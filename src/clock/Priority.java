@@ -6,10 +6,15 @@ package clock;
  */
 
 /**
- *
+ *Simple Priority Class which takes in the data and priority of an alarm from the model
  * @author Alanna Zimbehl - 19016467
  */
 public class Priority {
+    
+    /**
+    * @param - data - this holds the hours,minute,seconds data passed from the model
+    * @param - priority - this holds the priority value for the queue
+    */
     
     private final Alarm data;
     private final int priority;
@@ -18,7 +23,6 @@ public class Priority {
          this.data = data;
          this.priority = priority;
     }
-    
 
     public Alarm getData() {
         return data;

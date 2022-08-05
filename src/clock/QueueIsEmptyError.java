@@ -11,7 +11,6 @@ package clock;
  * @author Alanna Zimbehl - 19016467
  */
 
-
 public class QueueIsEmptyError extends Exception {
 
     public QueueIsEmptyError() {
