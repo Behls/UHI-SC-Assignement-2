@@ -10,7 +10,7 @@ import java.util.Observable;
 public class View implements Observer {
     
     ClockPanel panel;
-    AlarmPanel alarmClock;
+    DigitalPanel alarmClock;
     JButton aboutButton;
     JButton setAlarms;
     JButton viewAlarms;
@@ -29,9 +29,9 @@ public class View implements Observer {
         
         final JFrame frame = new JFrame();
         panel = new ClockPanel(model);
-        alarmClock = new AlarmPanel(model);
+        alarmClock = new DigitalPanel(model);
         
-      frame.setContentPane(panel);
+//      frame.setContentPane(panel);
 
         frame.setTitle("Java Alarm Clocks ");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,14 +47,14 @@ public class View implements Observer {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Clock");
         JMenu alarm = new JMenu("Alarms");
+        JMenu faces = new JMenu("Clock Faces");
         
 //      About menu item        
         aboutItem = new JMenuItem("About");
         aboutItem.setMnemonic('A');
         aboutItem.addActionListener(new AboutButtonHandler());
         menu.add(aboutItem);
-        menuBar.add(menu);
-        
+        menuBar.add(menu);       
         
 //      Clock Radio Buttons
         JRadioButtonMenuItem analogButton = new JRadioButtonMenuItem("Analog Face", true);
@@ -62,11 +62,11 @@ public class View implements Observer {
         ButtonGroup group = new ButtonGroup();
         group.add(analogButton);
         group.add(digitalButton);
-        menu.add(analogButton);
-        menu.add(digitalButton);
+        faces.add(analogButton);
+        faces.add(digitalButton);
+        menuBar.add(faces);
         
-        
-        
+               
 //      Toggling the analog and digital forms of the clock
         digitalButton.addActionListener(new ActionListener() {
         @Override
@@ -89,6 +89,7 @@ public class View implements Observer {
         viewAlarm = new JMenuItem("View Alarms");
         aboutItem.setMnemonic('V');
         setAlarm = new JMenuItem("Set Alarms");
+        setAlarm.addActionListener(new AlarmPanel(model));
         aboutItem.setMnemonic('S');
         editAlarm = new JMenuItem("Edit Alarms");
         aboutItem.setMnemonic('E');
@@ -102,18 +103,14 @@ public class View implements Observer {
         panel.setPreferredSize(new Dimension(300, 200));
         pane.add(panel, BorderLayout.CENTER);
 
-//      centered clock       
-        alarmClock.setPreferredSize(new Dimension(300, 200));
-        pane.add(panel, BorderLayout.CENTER);
         
 //      main clock UI
         setAlarms = new JButton("Set Alarm");
         pane.add(setAlarms, BorderLayout.PAGE_END);
+        setAlarms.addActionListener(new AlarmPanel(model));
         
         viewAlarms = new JButton("View All Alarms");
         pane.add(viewAlarms, BorderLayout.LINE_START);
-        
-        
         
         editAlarms = new JButton("Edit Alarms");
         pane.add(editAlarms, BorderLayout.LINE_END);

@@ -20,128 +20,168 @@ public class Alarm {
  * @param second contains the seconds value of the alarm set
  */
     
+  /**
+   * holds the hour data from the main GUI which is passed into the model to be stored into the priority queue
+   */
+    
     private int hour = 0;
+    
+  /**
+   * holds the minute data from the main GUI which is passed into the model to be stored into the priority queue
+   */
     private int minute = 0;
+    
+  /**
+   * holds the second data from the main GUI which is passed into the model to be stored into the priority queue
+   */
     private int second =0;
     
-//  placeholder variables for increasing and decreasing alarm values when set
-    private int hourValue;
-    private int minuteValue;
-    private int secondValue;
     
+   /**
+   * initialises the objects default values to the arguments passed in through the constructors method for hours, minutes and seconds
+   */
     public Alarm(int hour, int minute, int second) {
         this.hour = hour;
         this.minute = minute;
         this.second = second;
     }
     
-  /**
- * Setters and Getter
- * Standard setter and getter methods which set and return the values of Alarm
- */
+   /**
+   * initialises the objects default values to zero for hours, minutes and seconds
+   */
     
+    public Alarm() {
+        this.hour = 0;
+        this.minute = 0;
+        this.second = 0;
+    }
+    
+ /**
+ * gets the objects hour current value
+ */
     public int getHour() {
         return hour;
     }
-
+    
+/**
+ * sets the objects hour current value
+ */
     public void setHour(int hour) {
         this.hour = hour;
     }
-
+    
+/**
+ * gets the objects minute current value
+ */
     public int getMinute() {
         return minute;
     }
 
+    /**
+ * sets the objects minute current value
+ */
     public void setMinute(int minute) {
         this.minute = minute;
     }
 
+    /**
+ * gets the objects second current value
+ */
     public int getSecond() {
         return second;
     }
 
+    /**
+ * sets the objects second current value
+ */
     public void setSecond(int second) {
         this.second = second;
     }
     
-      /**
- * methods which increase the hour,minute and second values
- * this would be interacted through the UI - through button components
-
+    
+ /**
+ * increments the hours current value, if the value goes over 23 it returns 0, like a loop.
  */
     
     public void incrementHour(){
-        int value = this.hourValue;
-        if(value >= 0 && value < 24){
-            value++;
+        if(this.hour >=0 && this.hour <23){
+            this.hour++;  
         }else{
-            value = 0;
-        }
-        hour = value;           
+            this.hour = 0;
+        }     
     }
     
+ /**
+ * increments the minute current value, if the value goes over 59 it returns 0, like a loop.
+ */
     public void incrementMinute(){
-        int value = this.minuteValue;
-        if(value < 59 && value >= 0){
-        value++;
+        if(this.minute >=0 && this.minute <59){
+            this.minute++;  
         }else{
-            value = 0;
-        }  
-        
-        minute = value;
+            this.minute = 0;
+        } 
     }
     
+/**
+ * increments the second current value, if the value goes over 59 it returns 0, like a loop.
+ */     
     public void incrementSecond(){
-        int value = this.secondValue;
-        if(value < 59 && value >= 0){
-        value++;
+       if(this.second >=0 && this.second <59){
+            this.second++;  
         }else{
-            value = 0;
-        }  
-        
-        second = value;         
+            this.second = 0;
+        }        
     }
     
+/**
+ * decreases the hours current value, if the value under 0 it returns 23 like a loop.
+ */    
     public void decreaseHour(){
-        int value = this.hourValue;
-        if(value >= 0 && value < 24){
-            value--;
+       if(this.hour >1 && this.hour <=23){
+            this.hour--;  
         }else{
-            value = 0;
-        }
-        hour = value;          
+            this.hour = 23;
+        }           
     }
+    
+    
+/**
+ * increments the minute current value, if the value goes under 0 it returns 59 like a loop.
+ */ 
     
     public void decreaseMinute(){
-        int value = this.minuteValue;
-        
-        if(value < 59 && value >= 0){
-            value--;
-            
+        if(this.minute >1 && this.minute <=59){
+            this.minute--;  
         }else{
-            value = 0;
-        }   
-        minute = value;         
+            this.minute = 59;
+        }          
     }
     
+/**
+ * decreases the second current value, if the value under 0 it returns 59 like a loop.
+ */     
     public void decreaseSecond(){
-        int value = this.secondValue;
-        
-        if(value < 59 && value >= 0){
-            value--;
-            
+        if(this.second >1 && this.second<=59){
+            this.second--;  
         }else{
-            value = 0;
-        }   
-        second = value; 
+            this.second = 59;
+        } 
     }
-    
+
+/**
+ * 
+ * @return string message with the current held time
+ */    
     public String getTime(){
         String str="";
         str += getHour() + " " +getMinute()+ " " +getSecond();
         return str;
     }
-    
+ 
+/**
+ * 
+ * @return the getTime method and overrides the toString method, in a string representation
+ */
     @Override
     public String toString(){
         return getTime();
