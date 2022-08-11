@@ -4,71 +4,176 @@
  */
 package clock;
 
-/**
- * Alarm Panel Class
- * This class is a component which renders the alarm clock in a digital form 
- * otherwise known as a digital face
- */
-
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.*;
-import java.awt.font.*;
 import javax.swing.*;
+import javax.swing.event.*;
 
 /**
- *
+ * Alarm Panel is a dialogue box that opens where the user it able to set an alarm
+ * It implements the Action Listener class as it requires the user to click a button
+ * to become visible
  * @author Alanna Zimbehl - 19016467
  */
-
-public class AlarmPanel extends JPanel {
+public class AlarmPanel implements ActionListener {
+    
+    /**
+     * Class variables which are primarily the GUI attributes for building the dialog
+     * Model - the model is passed down as data from the alarm will be sent to the model
+     * Alarm - brings functionality from the alarm class into the dialog GUI
+     */
+    Alarm alarm;
     Model model;
-    int hour = 0;
-    int minute = 0;
-    int second = 0;
     
-    Font fontChoice=new Font("Calibri",Font.BOLD,20);
-    Color fontColor=new Color(19,65,134);
-    FontMetrics fm;
+    JMenuItem aboutItem;
+    JMenuItem viewAlarm;
+    JMenuItem setAlarm;
+    JMenuItem editAlarm;
+   
+    JDialog dialog;
+    JLabel hourLabel;
+    JLabel minuteLabel;
+    JLabel secondLabel;
+
+    JButton incrementHour;
+    JButton incrementMinute;
+    JButton incrementSecond;
     
+    JButton decreaseHour;
+    JButton decreaseMinute;
+    JButton decreaseSecond;
+
     
-    public AlarmPanel(Model m) {
-        
+    public AlarmPanel(Model m){
         model = m;
-        setPreferredSize(new Dimension(200,00));
-        setBackground(Color.white);
-        setVisible(false);
-    
     }
     
-   /**
-    * 
-    * @param g - graphics type - creating customise paint components to render within a frame/panel
-    */
-    
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        
-        g.setFont(fontChoice);
-        hour = model.hour;
-        minute = model.minute;
-        second = model.second;
-        
-        fm=g.getFontMetrics();
-        
-        int hourXCoordinate=20;
-        int minuteXCoordinate=hourXCoordinate+(fm.getMaxAdvance()*2);
-        int secondXCoordinate=hourXCoordinate+(fm.getMaxAdvance()*4);
-
-        //Set color that will use to draw digital number
-        g.setColor(fontColor);
-
-        //Draw hour, draw (:) between number, draw minute and draw second.
-        g.drawString(Integer.toString(hour),hourXCoordinate,20);
-        g.drawString(":",(hourXCoordinate+minuteXCoordinate)/2,20);
-        g.drawString(Integer.toString(minute),minuteXCoordinate,20);
-        g.drawString(":",(secondXCoordinate+minuteXCoordinate)/2,20);
-        g.drawString(Integer.toString(second),secondXCoordinate,20);
-        
+//    
+    @Override
+    public void actionPerformed(ActionEvent event){
+        openDialogue();
     }
+    
+    public void openDialogue(){
+       alarm = new Alarm();
+       dialog = new JDialog();
+     
+//       
+       JMenuBar menuBar = new JMenuBar();
+       JMenu menu = new JMenu("Clock");
+       
+//      About menu item        
+        aboutItem = new JMenuItem("About");
+        aboutItem.setMnemonic('A');
+        aboutItem.addActionListener(new AboutButtonHandler());
+        menu.add(aboutItem);
+        menuBar.add(menu);  
+        
+//     setting the dialogue sizing properties      
+       dialog.getContentPane();
+       dialog.setTitle("Set an Alarm");
+       dialog.setSize(500,300);
+       GridLayout layout = new GridLayout(3,1);
+       dialog.setLayout(layout);    
+       
+//     creating the labels for the alarm       
+       hourLabel = new JLabel(""+alarm.getHour(), SwingConstants.CENTER);
+       minuteLabel = new JLabel(""+alarm.getMinute(), SwingConstants.CENTER);
+       secondLabel = new JLabel(""+alarm.getSecond(), SwingConstants.CENTER);
+       dialog.add(hourLabel);
+       dialog.add(minuteLabel);
+       dialog.add(secondLabel);
+       
+//     creating and setting the action listeners and the buttons 
+       decreaseHour = new JButton("Decrease Hour");
+       decreaseHour.addActionListener(new ActionListener(){
+           
+           @Override         
+           public void actionPerformed(ActionEvent event) {
+                    alarm.decreaseHour();
+                    update();
+                }
+       });
+       
+       incrementHour = new JButton("Increase Hour");
+       incrementHour.addActionListener(new ActionListener(){
+           
+           @Override         
+           public void actionPerformed(ActionEvent event) {
+                    alarm.incrementHour();
+                    update();
+                }
+       });
+       
+       decreaseMinute = new JButton("Decrease Minute");
+       decreaseMinute.addActionListener(new ActionListener(){
+           
+           @Override         
+           public void actionPerformed(ActionEvent event) {
+                    alarm.decreaseMinute();
+                    update();
+                }
+       });
+       incrementMinute = new JButton("Increase Minute");
+       incrementMinute.addActionListener(new ActionListener(){
+           
+           @Override         
+           public void actionPerformed(ActionEvent event) {
+                    alarm.incrementMinute();
+                    update();
+                }
+       });
+       decreaseSecond = new JButton("Decrease Second");
+       decreaseSecond.addActionListener(new ActionListener(){
+           
+           @Override         
+           public void actionPerformed(ActionEvent event) {
+                    alarm.decreaseSecond();
+                    update();
+                }
+       });
+       
+     
+       incrementSecond = new JButton("Increase Second");
+       incrementSecond.addActionListener(new ActionListener(){
+           
+           @Override         
+           public void actionPerformed(ActionEvent event) {
+                    alarm.incrementSecond();
+                    update();
+                }
+       });
+                            
+       dialog.add(incrementHour);
+       dialog.add(incrementMinute);
+       dialog.add(incrementSecond);
+       
+       dialog.add(decreaseHour); 
+       dialog.add(decreaseMinute);
+       dialog.add(decreaseSecond);
+       
+//     setting the alarm menu
+       JMenu setAlarms = new JMenu("Set Alarm");
+       JMenuItem setAlarm = new JMenuItem("Set Alarm");
+       setAlarm.setMnemonic('S');
+       setAlarms.add(setAlarm);
+       menuBar.add(setAlarms);
+       
+       dialog.setJMenuBar(menuBar);
+       dialog.setVisible(true);
+       
+       
+    } 
+  
+//     update method so the labels repaint
+        public void update(){
+            
+            hourLabel.setText(""+alarm.getHour());
+            minuteLabel.setText(""+alarm.getMinute());
+            secondLabel.setText(""+alarm.getSecond());
+            hourLabel.repaint();
+            minuteLabel.repaint();
+            secondLabel.repaint();
+            
+        }
 }
